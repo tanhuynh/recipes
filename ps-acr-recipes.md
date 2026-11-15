@@ -208,6 +208,16 @@ One layer: **"_52_9822 (edit)"** — the raw SO itself (outer wrapper removed wi
 - **Crop:** left trim 541 px (1.40:1) put the spire on the left third and removed competing white fins; the 3:2 bottom-trim variant cut the FG hoodoo — avoid.
 - Paint (brush) dabs and Color Range masks are pure XMP → survive scripted writes (no `$BigT` needed).
 
+## 17. 0013 (overcast canyon, V-gap with fog, big foreground pine, R5 II CR3) — saved (`…/2026-11-01/_52_0013-Edit.tif`, `crf-0013-final.json`)
+- **WB: cyan (green) cast, not just blue** — cloud a* −3…−8 at every density, trees hue −148°. Needs **Tint** (+7) as well as Temp (5300). Clouds then a* 0, b* −3…−12 = natural overcast; fog b* −9 left as aerial blue. Don't eyedropper on partly clipped cloud.
+- **Crop 16:9 from 3:2** (top −614, bottom −…): sky top quarter had 1.5% of visual weight; keep a thin cloud band so the fog has a source. V gap lands on upper third.
+- **Sky structure:** top gradient (full at crop edge → zero above mesas) ∩ LumRange bright 0.58/0.72; Highlights −30, Exposure −0.40 (dialog), Dehaze +15, Texture +10 → L 89→77, cloud detail ×1.5–1.8, mesas untouched. Side effect: darker cloud reads cooler (b* −12) — user kept it (moody).
+- **Hero darker than its surroundings** (shaded cluster vs sunlit slopes 35 vs 46): lift only +0.40 dialog; separation comes from Clarity/Texture +15 (+29% detail) + surround −0.32. Lifting more would merge it into the slope.
+- **Tree pools** reused from 0028 (spot radials ∩ LumRange 0/0.08/0.42/0.52); user settled at Exposure +0.65 dialog. **Skip far forest near fog** — a spot under the far mesa went grey/hazy (+9 L*) and flattened depth; removed.
+- **Distant ravines:** radials on far walls ∩ LumRange shadows 0/0/0.30/0.42, Exposure −0.15 dialog + Blacks −10 → −2…−3 L* in gullies. Hazy far mesas have ~no real shadows → little effect; that haze *is* the depth cue. Don't push far darks toward FG darks (FG ~12 vs far ~24).
+- **Big FG pine (user):** Object masks (Mask/Image + Gesture) ∩ Color Range on needles; Clarity +10, Texture +25, Temp +6. Clean edge vs busy rock; keep Clarity ≤ +15 to avoid a bright rim against the slope.
+- **Units confirmed:** local Exposure dialog = **4 × stored** (user set +0.65 → 0.1625); Shadows/Blacks/Texture/Clarity/Dehaze/Sat dialog = stored × 100. Quote dialog values to the user.
+
 ## 15. Tooling
 - `acr.py`: builds `$LCs` XMP — `grad()`, `radial()`, `lum()` (Luminance Range), `corr()`, `set_cmd2(corrs, extra=GLOW)`; coords given in crop-preview px, converted to uncropped-SO normalized (`SX/SY` constants per image). For edits after dialog work, edit the live `$LCs` string instead and resend all keys.
 - `wb.py` (white-ref / rock / tree a*·b*·hue table from 16-bit renders). `m.py` (load → L*, C*, detail; region table) and `diff.py` (region ΔL/detail/C* table + `|ΔL|×15` mask image) — current versions in `~/dev/adb-mcp/recipes/`. `diff.py` region ΔL table + `|ΔL|×15` mask image; `wb.py` fog-density WB check; `mock.py` crop mocks with thirds grid.
