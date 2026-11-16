@@ -218,6 +218,17 @@ One layer: **"_52_9822 (edit)"** — the raw SO itself (outer wrapper removed wi
 - **Big FG pine (user):** Object masks (Mask/Image + Gesture) ∩ Color Range on needles; Clarity +10, Texture +25, Temp +6. Clean edge vs busy rock; keep Clarity ≤ +15 to avoid a bright rim against the slope.
 - **Units confirmed:** local Exposure dialog = **4 × stored** (user set +0.65 → 0.1625); Shadows/Blacks/Texture/Clarity/Dehaze/Sat dialog = stored × 100. Quote dialog values to the user.
 
+## 18. 0044 (Bryce sunrise: lit hoodoo fins below a big shaded mesa, layered blue ranges, sun-side clouds, R5 II CR3) — saved (`…/2026-11-02/_52_0044-Edit.tif`, `crf-0044-final.json`)
+- **Raw (user, manual):** Adobe Color; Exp −0.45, Contrast +7, Highlights −59, Shadows +40, Whites +3, Blacks −22; WB 6350/+8; Vibrance +15, Sat +1; Dehaze +17. First pass overshot (median 48, 4.1% clipped) → Exp −0.45 + Highlights −50 → median 40; clouds later calmed with Highlights −59 (not a filter mask).
+- **Raw vs filter rule:** decide the exposure at raw, sculpt the light in the filter. Raw stage has sensor headroom (highlight recovery, WB, overall Exp); the filter works on rendered pixels — fine for darkening/local work, can't recover clipped highlights. Clouds near the sun stay ~30–55% clipped even after −59 → raw clipping; acceptable unless printing large.
+- **Option key screenshot gotcha:** holding ⌥ in Camera Raw relabels sliders "Auto …" — not Auto settings.
+- **Light pools:** 5 radials on lit fins/clusters ∩ LumRange **0.40/0.55/1/1** (0.30/0.45 was too loose: shade rose up to +6 L*); Exp +0.80 dialog, Whites +10, Sat +10, Temp +5 → lit fins 40→44 while shade stays 29.
+- **Mesa face burn:** big radial minus cluster; Exp −0.30 dialog, Highlights −15, Shadows +20, Clarity/Texture +10, Dehaze +20, Temp +4 → face 46→39, sits behind the hoodoos.
+- **FG pines lift:** bottom gradient (y 0.76→0.94) Exp +0.30 dialog, Shadows +30, Texture +20, Clarity +10 → pines 20→26, base no longer a block.
+- **FG haze cut:** gradient y 0.57→0.86, Dehaze +20 paired with **Shadows +15** (not Blacks): Dehaze darkens darks; Blacks −8 had crushed the pines −4 L*.
+- **User:** "hill shadow" standalone brush Exp +0.35 / Shadows +31; right-distant-hill Object masks + paint, Dehaze +8, Temp −9 (right/left gap 16→12.6 — rest is sun-side glow, leave it).
+- **Standalone Brush masks (`Mask/Aggregate` + `crs:MaskBrushTable`) live in `$BigT` and are LOST on scripted writes** (effect → 0). Object masks with Gesture dabs and paint dabs inside an Aggregate (`crs:Masks`/`Mask/Paint`) are pure XMP and survive. → Do brush work last, or route later changes through the dialog.
+
 ## 15. Tooling
 - `acr.py`: builds `$LCs` XMP — `grad()`, `radial()`, `lum()` (Luminance Range), `corr()`, `set_cmd2(corrs, extra=GLOW)`; coords given in crop-preview px, converted to uncropped-SO normalized (`SX/SY` constants per image). For edits after dialog work, edit the live `$LCs` string instead and resend all keys.
 - `wb.py` (white-ref / rock / tree a*·b*·hue table from 16-bit renders). `m.py` (load → L*, C*, detail; region table) and `diff.py` (region ΔL/detail/C* table + `|ΔL|×15` mask image) — current versions in `~/dev/adb-mcp/recipes/`. `diff.py` region ΔL table + `|ΔL|×15` mask image; `wb.py` fog-density WB check; `mock.py` crop mocks with thirds grid.

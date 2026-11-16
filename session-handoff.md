@@ -28,6 +28,7 @@ Paste this into the new session together with **ps-acr-recipes.md** (full refere
 | **9956 revisit (PM)** | Fog rock edges (Texture/Clarity ∩ rock-tone range, +20…39% detail); Crevice lift (darks only, gentle); Right edge Exp −0.06 (fog edge flat with interior); Window fin Clarity/Texture +0.20, Dehaze +0.15; BR calm. Tree lift in crevices abandoned (not maskable under fog) | saved, 8 corrections |
 | **0028 hoodoo bowl** | WB cast fixed in raw SO (eyedropper on white tower); spire lift + surround darken; tree pools (spot radials ∩ LumRange); user pine deepen (∩ Color Range), FG vignette minus spire, Blue primary Sat +7; left-trim crop 1.40:1 | saved (`…/2026-11-01/_52_0028-Edit.tif`) |
 | **0013 fog-gap canyon** | WB cyan cast → 5300/+7 (Tint matters); 16:9 sky trim; sky gradient ∩ bright; hero crispness > lift; tree pools (skip far forest); distant ravines ∩ shadows; user object-mask pine | saved (`…/2026-11-01/_52_0013-Edit.tif`) |
+| **0044 Bryce sunrise fins** | Raw: Exp −0.45, Highlights −59 (clouds calmed at raw, not filter); light pools ∩ tight LumRange 0.40/0.55; mesa face burn minus cluster; FG pines lift; FG haze cut = Dehaze + Shadows (not Blacks); user hill-shadow brush + right-hill dehaze | saved (`…/2026-11-02/_52_0044-Edit.tif`) |
 
 ## Learned this session
 - Remove schema = filter key `$Rtch` (`crs:RemoveAreas`, `heal_patchmatch`, `fill_method="firefly"`, Mask/Paint dabs); pixels in `$BigT`.
@@ -53,5 +54,12 @@ Paste this into the new session together with **ps-acr-recipes.md** (full refere
 - Object masks (Mask/Image) live in `$BigT`; omit it on scripted writes, rebuild from the live `$LCs`.
 - Long `get smartObject` results with `$BigT` get truncated in chat → extract `$LCs` from the saved tool-result file.
 
+## Learned (0044)
+- Decide exposure/highlights at raw; filter only sculpts (can't recover clipped highlights).
+- Standalone Brush masks (MaskBrushTable, in `$BigT`) are lost on scripted writes — confirmed when the user's "hill shadow" brush went to 0. Once a user brush exists, no more scripted writes on that filter: give dialog values instead, or do brush work last.
+- LumRange for light pools: start tight (0.40/0.55); loose ranges lift the shade.
+- Dehaze darkens shadows — pair with Shadows +, not Blacks −.
+- ⌥ in Camera Raw shows "Auto …" slider labels (screenshot artefact).
+
 ## Open items
-- Still not observed: Brush (standalone), Depth masks.
+- Still not observed: Depth masks. (Standalone Brush observed on 0044: not script-safe.)
